@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Foto</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      height: 100dvh; /* altura real en móviles (sin barra del navegador) */
+    }
+    img {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      object-fit: contain; /* se ve entera, sin recortes, en cualquier pantalla */
+      display: block;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <img id="foto" src="validador.png" alt="Foto">
+  <script>
+    // Al tocar la imagen intenta entrar en modo pantalla completa real
+    // (los navegadores no permiten hacerlo automáticamente sin un toque).
+    document.getElementById('foto').addEventListener('click', function () {
+      var el = document.documentElement;
+      try {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          (el.requestFullscreen || el.webkitRequestFullscreen || function () {}).call(el);
+        } else {
+          (document.exitFullscreen || document.webkitExitFullscreen || function () {}).call(document);
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
